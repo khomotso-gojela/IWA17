@@ -21,7 +21,7 @@ const createArray = (length) => {
     const result = []
 
     for (let i = 0; i < length; i++) {
-        result.push(i+1)
+        result.push(i)
     }
 
     return result
@@ -32,22 +32,23 @@ const createData = () => {
     //current.set(1)
     const startDay = new Date(current.getFullYear(), current.getMonth(), 1).getDay();
     const daysInMonth = new Date(current.getFullYear(), current.getMonth() + 1, 0).getDate();
-
+    
     const weeks = createArray(5)
     const days = createArray(7)
     const result = [];
 
     for (const weekIndex of weeks) {
         result.push({
-            week: weekIndex,
+            week: weekIndex+1,
             days: []
         });
 
         for (const dayIndex of days) {
-            const day = (dayIndex - startDay) + ((weekIndex -1) * 7)
+
+            const day = ((dayIndex+1) - startDay) + (weekIndex * 7)
             const isValid = day > 0 && day <= daysInMonth;
 
-            result[weekIndex-1].days.push({
+            result[weekIndex].days.push({
                 dayOfWeek: dayIndex,
                 value: isValid ? day : '',
             });
